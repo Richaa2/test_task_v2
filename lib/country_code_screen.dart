@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test_task_v2/country.dart';
 import 'package:test_task_v2/textfield_widget.dart';
 
 class CountryCodeScreen extends StatelessWidget {
   const CountryCodeScreen({
     Key? key,
+    required this.listOfCountries,
   }) : super(key: key);
 
+  final List<Country> listOfCountries;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,12 +21,22 @@ class CountryCodeScreen extends StatelessWidget {
           _buildTitle(context),
           TextFieldWidget(),
           Expanded(
-            child: ListView(
-              children: [
-                Text('USA'),
-                Text('USA'),
-                Text('USA'),
-              ],
+            child: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                print(listOfCountries[index].flag);
+                return Row(
+                  children: [
+                    Container(
+                      width: 30,
+                      height: 20,
+                      child: SvgPicture.network(listOfCountries[index].flag),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    )
+                  ],
+                );
+              },
             ),
           )
         ]),

@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_task_v2/api/bloc/country_bloc.dart';
+import 'package:test_task_v2/country.dart';
 import 'package:test_task_v2/country_code_screen.dart';
 import 'package:test_task_v2/textfield_widget.dart';
 
@@ -10,13 +15,32 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: mainColumn([
-        _buildGetStarted(),
-        const Spacer(),
-        _buldContainers(context),
-        const Spacer(),
-        _buildButton(),
-      ]),
+      body: BlocConsumer<CountryBloc, CountryState>(
+        listener: (context, state) {
+          log(state.toString());
+        },
+        builder: (context, state) {
+          if (state is CountryInitialState) {
+            BlocProvider.of<CountryBloc>(context).add(CountryLoadEvent());
+          }
+          if (state is CountryLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is CountryLoadedState) {
+            List<Country> countries = state.loadedCountries;
+            return mainColumn([
+              _buildGetStarted(),
+              const Spacer(),
+              _buldContainers(context, countries),
+              const Spacer(),
+              _buildButton(),
+            ]);
+          }
+          return Container();
+        },
+      ),
     );
   }
 
@@ -51,11 +75,15 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Row _buldContainers(BuildContext context) {
+  Row _buldContainers(BuildContext context, List<Country> countries) {
     return Row(
       children: [
         InkWell(
-          onTap: () => showModalBottomSheetMetod(context, CountryCodeScreen()),
+          onTap: () => showModalBottomSheetMetod(
+              context,
+              CountryCodeScreen(
+                listOfCountries: countries,
+              )),
           child: Container(
               width: 71,
               height: 48,
