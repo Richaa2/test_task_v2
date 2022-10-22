@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:meta/meta.dart';
 import 'package:test_task_v2/api/repository.dart';
 
@@ -20,10 +22,24 @@ class CountryBloc extends Bloc<CountryEvent, CountryState> {
 
         emit(CountryLoadedState(
           loadedCountries: loadedCountryList,
+          filledField: false,
         ));
       } catch (e) {
         print(e.toString());
       }
     });
+
+    on<CountryFillEvent>(
+      ((event, emit) {
+        try {
+          emit(CountryLoadedState(
+            loadedCountries: event.loadedCountries,
+            filledField: false,
+          ));
+        } catch (e) {
+          print(e.toString());
+        }
+      }),
+    );
   }
 }

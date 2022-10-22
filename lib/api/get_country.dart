@@ -5,7 +5,7 @@ import 'package:test_task_v2/country.dart';
 class CountryProvider {
   Future<List<Country>> getCountry() async {
     const url =
-        'https://restcountries.com/v2/all?fields=name,callingCodes,flag';
+        'https://restcountries.com/v2/all?fields=name,callingCodes,flags';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {

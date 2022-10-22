@@ -4,21 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test_task_v2/api/bloc/country_bloc.dart';
 import 'package:test_task_v2/country.dart';
 import 'package:test_task_v2/country_code_screen.dart';
 import 'package:test_task_v2/textfield_widget.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+bool b = false;
 
+class MainScreen extends StatefulWidget {
+  final String imageOfCountry;
+  final String callingCode;
+  MainScreen(
+      {super.key, required this.imageOfCountry, required this.callingCode});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<CountryBloc, CountryState>(
-        listener: (context, state) {
-          log(state.toString());
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           if (state is CountryInitialState) {
             BlocProvider.of<CountryBloc>(context).add(CountryLoadEvent());
@@ -33,9 +42,13 @@ class MainScreen extends StatelessWidget {
             return mainColumn([
               _buildGetStarted(),
               const Spacer(),
-              _buldContainers(context, countries),
+              _buldContainers(
+                context,
+                countries,
+                b,
+              ),
               const Spacer(),
-              _buildButton(),
+              _buildButton(b),
             ]);
           }
           return Container();
@@ -44,7 +57,7 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Row _buildButton() {
+  Row _buildButton(bool b) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -53,10 +66,12 @@ class MainScreen extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: const Color.fromRGBO(244, 245, 255, 0.4)),
-            child: const Icon(
-              Icons.arrow_forward,
+                color: b ? Colors.white : Color.fromRGBO(244, 245, 255, 0.4)),
+            child: IconButton(
+              icon: Icon(Icons.arrow_forward),
               color: Color(0xff7886B8),
+              onPressed: () =>
+                  b ? print('Number approved') : print('plese fill the field'),
             )),
       ],
     );
@@ -75,7 +90,11 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Row _buldContainers(BuildContext context, List<Country> countries) {
+  Row _buldContainers(
+    BuildContext context,
+    List<Country> countries,
+    bool b,
+  ) {
     return Row(
       children: [
         InkWell(
@@ -89,12 +108,29 @@ class MainScreen extends StatelessWidget {
               height: 48,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  color: const Color.fromRGBO(244, 245, 255, 0.4))),
+                  color: const Color.fromRGBO(244, 245, 255, 0.4)),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 28,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(widget.imageOfCountry)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    Text('+' + widget.callingCode)
+                  ])),
         ),
         const SizedBox(
           width: 8,
         ),
-        Expanded(child: TextFieldWidget())
+        Expanded(
+            child: TextFieldWidget(
+          countries: countries,
+        ))
       ],
     );
   }

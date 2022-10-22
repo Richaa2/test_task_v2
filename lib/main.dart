@@ -11,7 +11,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-//TODO зберігати svg в окрему штуку щоб воно загружалось роставити принципі годин 5 роботи десь)))
+
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: Color(0xff8EAAFB),
           ),
-          home: MainScreen(),
+          home: MainScreen(
+            imageOfCountry: 'https://flagcdn.com/w320/ua.png',
+            callingCode: '380',
+          ),
         ),
       ),
     );
