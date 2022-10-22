@@ -2,18 +2,18 @@ import 'dart:convert';
 
 class Country {
   final List callingCodes;
-  final String flag;
+  final String flags;
   final String name;
   Country({
     required this.callingCodes,
-    required this.flag,
+    required this.flags,
     required this.name,
   });
 
   factory Country.fromMap(Map<String, dynamic> map) {
     return Country(
       callingCodes: map['callingCodes'] ?? '',
-      flag: map['flag'] ?? '',
+      flags: map['flags']['png'] ?? 'https://flagcdn.com/no.svg',
       name: map['name'] ?? '',
     );
   }
@@ -27,10 +27,10 @@ class Country {
 
     return other is Country &&
         other.callingCodes == callingCodes &&
-        other.flag == flag &&
+        other.flags == flags &&
         other.name == name;
   }
 
   @override
-  int get hashCode => callingCodes.hashCode ^ flag.hashCode ^ name.hashCode;
+  int get hashCode => callingCodes.hashCode ^ flags.hashCode ^ name.hashCode;
 }

@@ -9,5 +9,9 @@ class CountryLoadingState extends CountryState {}
 
 class CountryLoadedState extends CountryState {
   final List<Country> loadedCountries;
-  CountryLoadedState({required this.loadedCountries});
+  final bool filledField;
+  CountryLoadedState({
+    required this.loadedCountries,
+    required this.filledField,
+  });
 }
