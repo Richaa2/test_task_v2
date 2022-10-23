@@ -1,10 +1,10 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// ignore_for_file: avoid_print
 
-import 'package:meta/meta.dart';
-import 'package:test_task_v2/api/repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../country.dart';
+import '../../api/country.dart';
+import '../repository.dart';
 
 part 'country_event.dart';
 part 'country_state.dart';

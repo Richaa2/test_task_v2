@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:test_task_v2/country.dart';
+import 'package:test_task_v2/api/country.dart';
 
 class CountryProvider {
   Future<List<Country>> getCountry() async {
@@ -12,10 +12,9 @@ class CountryProvider {
       List<Country> contriesList = [];
       final List countries = json.decode(response.body);
 
-      countries.forEach((element) {
+      for (var element in countries) {
         contriesList.add(Country.fromMap(element));
-      });
-      print(contriesList.length);
+      }
 
       return contriesList;
     } else {

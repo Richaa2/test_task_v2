@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:test_task_v2/api/bloc/country_bloc.dart';
 import 'package:test_task_v2/api/repository.dart';
 
@@ -22,9 +23,9 @@ class MyApp extends StatelessWidget {
                 RepositoryProvider.of<CountryRepository>(context)),
         child: MaterialApp(
           theme: ThemeData(
-            scaffoldBackgroundColor: Color(0xff8EAAFB),
+            scaffoldBackgroundColor: const Color(0xff8EAAFB),
           ),
-          home: MainScreen(
+          home: const MainScreen(
             imageOfCountry: 'https://flagcdn.com/w320/ua.png',
             callingCode: '380',
           ),

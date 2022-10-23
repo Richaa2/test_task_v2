@@ -1,5 +1,5 @@
 import 'package:test_task_v2/api/get_country.dart';
-import 'package:test_task_v2/country.dart';
+import 'package:test_task_v2/api/country.dart';
 
 class CountryRepository {
   final CountryProvider _countryRepository = CountryProvider();
