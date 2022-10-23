@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task_v2/api/bloc/country_bloc.dart';
 import 'package:test_task_v2/api/repository.dart';
 
-import 'main_screen.dart';
+import 'main_screen/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
