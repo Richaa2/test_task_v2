@@ -6,8 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task_v2/api/bloc/country_bloc.dart';
 import 'package:test_task_v2/api/country.dart';
 import 'package:test_task_v2/container_for_flag.dart';
-import 'package:test_task_v2/country_code_screen.dart';
-import 'package:test_task_v2/textfield_widget.dart';
+import 'package:test_task_v2/main_screen/textfield_widget.dart';
+
+import '../search_screen/country_code_screen.dart';
 
 bool filledField = false;
 

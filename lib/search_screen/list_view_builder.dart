@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_task_v2/api/country.dart';
 import 'package:test_task_v2/container_for_flag.dart';
-import 'package:test_task_v2/main_screen.dart';
+import 'package:test_task_v2/main_screen/main_screen.dart';
 
 class ListViewBuilderWidget extends StatelessWidget {
   const ListViewBuilderWidget({

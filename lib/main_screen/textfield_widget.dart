@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task_v2/api/bloc/country_bloc.dart';
 
-import 'api/country.dart';
+import '../api/country.dart';
 import 'main_screen.dart';
 
 class TextFieldWidget extends StatefulWidget {

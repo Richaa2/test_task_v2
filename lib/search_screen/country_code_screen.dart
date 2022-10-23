@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:test_task_v2/api/country.dart';
-import 'package:test_task_v2/list_view_builder.dart';
+import 'package:test_task_v2/search_screen/list_view_builder.dart';
 
 class CountryCodeScreen extends StatefulWidget {
   const CountryCodeScreen({
